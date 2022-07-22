@@ -37,7 +37,7 @@ To train a reinforcement learning agent to maintain a double-jointed arm pointin
 
 ### Results
 
-This project is solved in 300 episodes exceeding average rewards of 30. Below shows the results of training process over the time.
+This project is solved in 254 episodes exceeding average rewards of 30. Below shows the results of training process over the time.
 <img src ="resource/rewards.jpg"/>
 
 ### Futuee Work
