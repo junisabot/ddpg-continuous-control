@@ -28,11 +28,11 @@ class DDPG():
         self.noise = OUNoise(action_size, random_seed)
         self.critic_local = Critic(state_size, action_size, random_seed).to(device)
         self.critic_target = Critic(state_size, action_size, random_seed).to(device)
-        self.critic_optimizer = optim.Adam(self.critic_local.parameters(), lr=config.LR_CRITIC, weight_decay=0)
+        self.critic_optimizer = optim.Adam(self.critic_local.parameters(), lr=config.LR, weight_decay=0)
 
         self.actor_local = Actor(state_size, action_size, random_seed).to(device)
         self.actor_target = Actor(state_size, action_size, random_seed).to(device)
-        self.actor_optimizer = optim.Adam(self.actor_local.parameters(), lr=config.LR_ACTOR)
+        self.actor_optimizer = optim.Adam(self.actor_local.parameters(), lr=config.LR)
 
     def step(self, states, actions, rewards, next_states, dones):
         for i in range(self.num_agents):
