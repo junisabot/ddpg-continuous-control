@@ -1,5 +1,7 @@
 """
 """
+DEVICE = "cuda:0"
+SEED = 2
 N_EPISODES = 1000
 BATCH_SIZE = 128
 BUFFER_SIZE = 100000
@@ -7,4 +9,4 @@ GAMMA = 0.99
 TAU = 0.001
 LR = 0.0001
 SAVE_DIRECTORY = "./pretrained_model"
-UNITY_ENVIRONMENT_PATH = './reacher/Reacher.x86_64'
+UNITY_ENVIRONMENT_PATH = './reacher/Reacher.exe'

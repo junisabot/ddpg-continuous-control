@@ -11,8 +11,11 @@ import torch.optim as optim
 import config
 from network.actor import Actor
 from network.critic import Critic
+torch.manual_seed(config.SEED)
+random.seed(config.SEED)
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+device = torch.device(config.DEVICE)
+
 class DDPG():        
     def __init__(self, input_dims, action_dims, num_agents):        
         self.input_dims = input_dims
@@ -78,10 +81,7 @@ class DDPG():
             target_param.data.copy_(config.TAU*local_param.data + (1.0-config.TAU)*target_param.data)
 
 class OUNoise:
-    """Ornstein-Uhlenbeck process."""
-
     def __init__(self, size, mu=0., theta=0.15, sigma=0.2):
-        """Initialize parameters and noise process."""
         self.size = size        
         self.mu = mu * np.ones(size)
         self.theta = theta
@@ -89,15 +89,14 @@ class OUNoise:
         self.reset()
 
     def reset(self):
-        """Reset the internal state (= noise) to mean (mu)."""
         self.state = copy.copy(self.mu)
 
     def sample(self):
-        """Update internal state and return it as a noise sample."""
         x = self.state        
         dx = self.theta * (self.mu - x) + self.sigma * np.random.standard_normal(self.size)
         self.state = x + dx
         return self.state
+
 class ReplayBuffer:
     def __init__(self, input_dim, action_dims, mem_size=config.BUFFER_SIZE):
         self.mem_size = mem_size
